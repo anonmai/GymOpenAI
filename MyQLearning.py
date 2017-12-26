@@ -2,7 +2,7 @@ import gym
 import numpy as np
 import random
 import math
-NUM_EPISODES = 10000
+NUM_EPISODES = 100000
 MAX_T = 250
 ALPHA = 0.2
 GAMMA = 1
@@ -15,7 +15,7 @@ env = gym.make('CartPole-v0')
 NUM_ACTIONS = env.action_space.n
 
 
-CART_POS = np.linspace(-4.8, 4.8, 20)
+CART_POS = np.linspace(-2.4, 2.4, 10)
 POLE_ANGLE = np.linspace(-2, 2, 10)
 CART_VEL = np.linspace(-1, 1, 10)
 ANG_RATE = np.linspace(-3, 3, 10)
