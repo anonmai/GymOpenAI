@@ -60,7 +60,7 @@ for episode in range(NUM_EPISODES):
 
 	for t in range(MAX_T):
 		#print t
-		#env.render()
+		env.render()
 		action = get_action(state)
 
 		obs, reward, done, _ = env.step(action)
@@ -72,8 +72,6 @@ for episode in range(NUM_EPISODES):
 			Q[(state_prime, action_prime)] = np.random.uniform(1,-1)
 		if (state, action) not in Q:
 			Q[(state, action)] = np.random.uniform(1,-1)
-
-
 
 		#print "olderstate: ", Q[(state, action)], "done", done,  "Reward:", reward
 		Q[(state, action)] = (1-ALPHA)*Q[(state, action)] + ALPHA*(reward + GAMMA*Q[(state_prime, action_prime)])

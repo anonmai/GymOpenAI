@@ -2,10 +2,10 @@ import gym
 import numpy as np
 import random
 import math
-NUM_EPISODES = 10000
+NUM_EPISODES = 2000
 MAX_T = 20000
-ALPHA = 0.3
-GAMMA = 0.95
+ALPHA = 0.2
+GAMMA = 0.995
 
 EXPLORATION_RATE = 0.5
 EXPLORATION_RATE_DECAY = 0.9
@@ -14,11 +14,10 @@ env = gym.make('CartPole-v0')
 
 NUM_ACTIONS = env.action_space.n
 
-
-CART_POS = np.linspace(-2.4, 2.4, 100)
-POLE_ANGLE = np.linspace(-2, 2, 100)
-CART_VEL = np.linspace(-1, 1, 100)
-ANG_RATE = np.linspace(-3, 3, 100)
+CART_POS = np.linspace(-2.4, 2.4, 10)
+CART_VEL = np.linspace(-1, 1, 10)
+POLE_ANGLE = np.linspace(-2, 2, 10)
+ANG_RATE = np.linspace(-3, 3, 10)
 
 DEBUG_MODE = True
 streaks = 0
@@ -52,7 +51,6 @@ def get_action(state):
 	return np.argmax(x)
 
 avg = 0
-
 
 for episode in range(NUM_EPISODES):
 	obs = env.reset()
@@ -98,7 +96,4 @@ for episode in range(NUM_EPISODES):
 	if streaks >= 120:
 		print("Completed in %d episodes" % (episodes))
 		break
-
-
-
 	#print Q

@@ -1,5 +1,5 @@
 import gym
-env = gym.make('MountainCar-v0')
+env = gym.make('Acrobot-v1')
 env.reset()
 for _ in range(1000):
     env.render()
