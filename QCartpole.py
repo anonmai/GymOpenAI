@@ -4,8 +4,8 @@ import random
 import math
 NUM_EPISODES = 10000
 MAX_T = 20000
-ALPHA = 0.2
-GAMMA = 1
+ALPHA = 0.3
+GAMMA = 0.95
 
 EXPLORATION_RATE = 0.5
 EXPLORATION_RATE_DECAY = 0.9
@@ -15,10 +15,10 @@ env = gym.make('CartPole-v0')
 NUM_ACTIONS = env.action_space.n
 
 
-CART_POS = np.linspace(-4.8, 4.8, 20)
-POLE_ANGLE = np.linspace(-2, 2, 10)
-CART_VEL = np.linspace(-1, 1, 10)
-ANG_RATE = np.linspace(-3, 3, 10)
+CART_POS = np.linspace(-2.4, 2.4, 100)
+POLE_ANGLE = np.linspace(-2, 2, 100)
+CART_VEL = np.linspace(-1, 1, 100)
+ANG_RATE = np.linspace(-3, 3, 100)
 
 DEBUG_MODE = True
 streaks = 0
@@ -57,11 +57,12 @@ avg = 0
 for episode in range(NUM_EPISODES):
 	obs = env.reset()
 	state = to_state(obs)
+	action = get_action(state)
 
 	for t in range(MAX_T):
 		#print t
 		#env.render()
-		action = get_action(state)
+		#action = get_action(state)
 
 		obs, reward, done, _ = env.step(action)
 		
@@ -73,14 +74,13 @@ for episode in range(NUM_EPISODES):
 		if (state, action) not in Q:
 			Q[(state, action)] = np.random.uniform(1,-1)
 
-
-
 		#print "olderstate: ", Q[(state, action)], "done", done,  "Reward:", reward
 		Q[(state, action)] = (1-ALPHA)*Q[(state, action)] + ALPHA*(reward + GAMMA*Q[(state_prime, action_prime)])
 		#print "newstate: ", Q[(state, action)]
 		state = state_prime
+		action = action_prime
 
-		#print "done", done
+		#print (done)
 
 		if done:
 			#print("Episode %d completed in %d" % (episode, t))
